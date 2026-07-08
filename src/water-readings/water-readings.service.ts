@@ -45,6 +45,34 @@ export class WaterReadingsService {
     });
   }
 
+  async findAll() {
+    return this.prisma.waterReading.findMany({
+      include: {
+        department: true,
+      },
+      orderBy: [{ readingDate: 'desc' }, { department: { code: 'asc' } }],
+    });
+  }
+
+  async findByDate(date: string) {
+    const startDate = new Date(date);
+    const endDate = new Date(date);
+    endDate.setDate(endDate.getDate() + 1);
+
+    return this.prisma.waterReading.findMany({
+      where: {
+        readingDate: {
+          gte: startDate,
+          lt: endDate,
+        },
+      },
+      include: {
+        department: true,
+      },
+      orderBy: { department: { code: 'asc' } },
+    });
+  }
+
   async findOne(id: string) {
     const reading = await this.prisma.waterReading.findUnique({
       where: { id },
