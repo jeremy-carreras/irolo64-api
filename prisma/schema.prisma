@@ -41,3 +41,16 @@ model WaterReading {
   @@index([departmentId])
   @@index([readingDate])
 }
+
+model Receipt {
+  id              String   @id @default(uuid())
+  totalCharge     Decimal
+  periodStart     DateTime
+  periodEnd       DateTime
+  pricePerM3      Decimal
+  paymentDeadline DateTime
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([periodStart])
+}
