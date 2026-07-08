@@ -41,6 +41,18 @@ export class WaterReadingsController {
 export class WaterReadingsDetailController {
   constructor(private waterReadingsService: WaterReadingsService) {}
 
+  @Get('by-date/:date')
+  @HttpCode(200)
+  findByDate(@Param('date') date: string) {
+    return this.waterReadingsService.findByDate(date);
+  }
+
+  @Get('all')
+  @HttpCode(200)
+  findAll() {
+    return this.waterReadingsService.findAll();
+  }
+
   @Get(':id')
   @HttpCode(200)
   async findOne(@Param('id') id: string) {
