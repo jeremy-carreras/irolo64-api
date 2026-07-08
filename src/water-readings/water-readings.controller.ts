@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  HttpCode,
+  NotFoundException,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { WaterReadingsService } from './water-readings.service';
@@ -19,6 +21,7 @@ export class WaterReadingsController {
   constructor(private waterReadingsService: WaterReadingsService) {}
 
   @Post()
+  @HttpCode(201)
   create(
     @Param('departmentId') departmentId: string,
     @Body() dto: CreateWaterReadingDto,
@@ -27,6 +30,7 @@ export class WaterReadingsController {
   }
 
   @Get()
+  @HttpCode(200)
   findByDepartment(@Param('departmentId') departmentId: string) {
     return this.waterReadingsService.findByDepartment(departmentId);
   }
@@ -38,11 +42,17 @@ export class WaterReadingsDetailController {
   constructor(private waterReadingsService: WaterReadingsService) {}
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.waterReadingsService.findOne(id);
+  @HttpCode(200)
+  async findOne(@Param('id') id: string) {
+    const reading = await this.waterReadingsService.findOne(id);
+    if (!reading) {
+      throw new NotFoundException('Water reading not found');
+    }
+    return reading;
   }
 
   @Patch(':id')
+  @HttpCode(200)
   update(
     @Param('id') id: string,
     @Body() dto: UpdateWaterReadingDto,
@@ -51,6 +61,7 @@ export class WaterReadingsDetailController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   remove(@Param('id') id: string) {
     return this.waterReadingsService.remove(id);
   }
