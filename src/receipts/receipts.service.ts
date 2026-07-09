@@ -14,6 +14,7 @@ export class ReceiptsService {
         periodEnd: new Date(dto.periodEnd),
         pricePerM3: dto.pricePerM3,
         paymentDeadline: new Date(dto.paymentDeadline),
+        pdfUrl: dto.pdfUrl || null,
       },
     });
   }
@@ -39,6 +40,7 @@ export class ReceiptsService {
         periodEnd: new Date(dto.periodEnd),
         pricePerM3: dto.pricePerM3,
         paymentDeadline: new Date(dto.paymentDeadline),
+        pdfUrl: dto.pdfUrl || null,
       },
     });
   }
