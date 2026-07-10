@@ -10,9 +10,10 @@ export class ReceiptsService {
     return this.prisma.receipt.create({
       data: {
         totalCharge: dto.totalCharge,
+        consumedM3: dto.consumedM3,
+        pricePerM3: dto.pricePerM3,
         periodStart: new Date(dto.periodStart),
         periodEnd: new Date(dto.periodEnd),
-        pricePerM3: dto.pricePerM3,
         paymentDeadline: new Date(dto.paymentDeadline),
         pdfUrl: dto.pdfUrl || null,
       },
@@ -36,9 +37,10 @@ export class ReceiptsService {
       where: { id },
       data: {
         totalCharge: dto.totalCharge,
+        consumedM3: dto.consumedM3,
+        pricePerM3: dto.pricePerM3,
         periodStart: new Date(dto.periodStart),
         periodEnd: new Date(dto.periodEnd),
-        pricePerM3: dto.pricePerM3,
         paymentDeadline: new Date(dto.paymentDeadline),
         pdfUrl: dto.pdfUrl || null,
       },
