@@ -45,9 +45,10 @@ model WaterReading {
 model Receipt {
   id              String   @id @default(uuid())
   totalCharge     Decimal
+  consumedM3      Decimal
+  pricePerM3      Decimal
   periodStart     DateTime
   periodEnd       DateTime
-  pricePerM3      Decimal
   paymentDeadline DateTime
   pdfUrl          String?
   createdAt       DateTime @default(now())

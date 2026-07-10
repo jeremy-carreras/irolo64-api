@@ -4,14 +4,17 @@ export class CreateReceiptDto {
   @IsNumber()
   totalCharge: number;
 
+  @IsNumber()
+  consumedM3: number;
+
+  @IsNumber()
+  pricePerM3: number;
+
   @IsDateString()
   periodStart: string;
 
   @IsDateString()
   periodEnd: string;
-
-  @IsNumber()
-  pricePerM3: number;
 
   @IsDateString()
   paymentDeadline: string;

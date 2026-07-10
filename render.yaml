@@ -1,12 +1,9 @@
 services:
   - type: web
     name: irolo64-api
-    runtime: node
-    plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm run start:prod
+    env: node
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: NODE_VERSION
-        value: 24.14.1
