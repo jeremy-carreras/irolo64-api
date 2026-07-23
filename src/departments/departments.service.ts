@@ -31,6 +31,17 @@ export class DepartmentsService {
     });
   }
 
+  async findAllWithReadings() {
+    return this.prisma.department.findMany({
+      include: {
+        waterReadings: {
+          orderBy: { readingDate: 'asc' },
+        },
+      },
+      orderBy: { code: 'asc' },
+    });
+  }
+
   async findOne(id: string) {
     const dept = await this.prisma.department.findUnique({
       where: { id },
