@@ -32,6 +32,12 @@ export class DepartmentsController {
     return this.departmentsService.findAll();
   }
 
+  @Get('with-readings/all')
+  @HttpCode(200)
+  findAllWithReadings() {
+    return this.departmentsService.findAllWithReadings();
+  }
+
   @Get(':id')
   @HttpCode(200)
   async findOne(@Param('id') id: string) {
